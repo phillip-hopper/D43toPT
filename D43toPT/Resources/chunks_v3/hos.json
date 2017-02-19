@@ -1,0 +1,58 @@
+[
+  {
+    "chapter": 1,
+    "first_verses": [1, 3, 6, 8, 10]
+  },
+  {
+    "chapter": 2,
+    "first_verses": [1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 19, 21, 23]
+  },
+  {
+    "chapter": 3,
+    "first_verses": [1, 4]
+  },
+  {
+    "chapter": 4,
+    "first_verses": [1, 3, 4, 6, 8, 10, 11, 13, 15, 17]
+  },
+  {
+    "chapter": 5,
+    "first_verses": [1, 3, 5, 8, 10, 12, 14]
+  },
+  {
+    "chapter": 6,
+    "first_verses": [1, 4, 6, 8, 10]
+  },
+  {
+    "chapter": 7,
+    "first_verses": [1, 3, 6, 8, 10, 12, 14, 16]
+  },
+  {
+    "chapter": 8,
+    "first_verses": [1, 4, 6, 8, 11, 13]
+  },
+  {
+    "chapter": 9,
+    "first_verses": [1, 3, 5, 7, 8, 10, 11, 13, 15, 16]
+  },
+  {
+    "chapter": 10,
+    "first_verses": [1, 3, 5, 7, 9, 10, 12, 14]
+  },
+  {
+    "chapter": 11,
+    "first_verses": [1, 3, 5, 8, 10, 12]
+  },
+  {
+    "chapter": 12,
+    "first_verses": [1, 3, 5, 7, 9, 11, 13]
+  },
+  {
+    "chapter": 13,
+    "first_verses": [1, 3, 4, 7, 9, 12, 14, 15, 16]
+  },
+  {
+    "chapter": 14,
+    "first_verses": [1, 3, 4, 7, 9]
+  }
+]

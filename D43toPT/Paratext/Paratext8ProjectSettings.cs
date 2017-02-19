@@ -1,13 +1,16 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Text.RegularExpressions;
 using System.Xml;
 
-namespace D43toPT
+namespace D43toPT.Paratext
 {
 	class Paratext8ProjectSettings
 	{
 		private XmlDocument m_xmlDocument;
 		private string m_fileName;
 		private string m_usfmFileFormat;
+		private Regex m_nameAndID;
 
 		public Paratext8ProjectSettings(string projectDirectory)
 		{
@@ -43,11 +46,32 @@ namespace D43toPT
 				var bookFmt = GetValue("FileNameBookNameForm").Trim();
 				bookFmt = bookFmt.Replace("41", "{0}").Replace("MAT", "{1}");
 				var preForm = GetValue("FileNamePrePart").Trim();
-				var postForm = GetValue("FileNamePostPart").Trim();
-				m_usfmFileFormat = preForm + bookFmt + postForm;
+
+				m_usfmFileFormat = preForm + bookFmt + UsfmFileSuffix;
 			}
 
 			return string.Format(m_usfmFileFormat, bookNumber, bookId);
+		}
+
+		public string UsfmFileSuffix
+		{
+			get { return GetValue("FileNamePostPart").Trim(); }
+		}
+
+		public KeyValuePair<string, string> GetNumberAndID(string fileName)
+		{
+			if (m_nameAndID == null)
+			{
+				var bookPattern = GetValue("FileNameBookNameForm").Trim();
+				bookPattern = bookPattern.Replace("41", @"(\d{2})").Replace("MAT", @"([\dA-Z]{3})");
+				m_nameAndID = new Regex(bookPattern);
+			}
+
+			var match = m_nameAndID.Match(fileName);
+			if (!match.Success)
+				return new KeyValuePair<string, string>(string.Empty, string.Empty);
+
+			return new KeyValuePair<string, string>(match.Groups[1].Value, match.Groups[2].Value);
 		}
 	}
 }

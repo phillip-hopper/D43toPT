@@ -40,7 +40,11 @@
 			this.btnConvertToDoor43 = new System.Windows.Forms.Button();
 			this.label3 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
+			this.chkChunkMarkers = new System.Windows.Forms.CheckBox();
+			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+			this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
 			this.tableLayoutPanel1.SuspendLayout();
+			this.statusStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -120,20 +124,22 @@
 			this.tableLayoutPanel1.Controls.Add(this.txtDoor43Directory, 2, 3);
 			this.tableLayoutPanel1.Controls.Add(this.txtParatextDirectory, 2, 2);
 			this.tableLayoutPanel1.Controls.Add(this.btnConvertToParatext, 2, 4);
-			this.tableLayoutPanel1.Controls.Add(this.btnConvertToDoor43, 2, 5);
+			this.tableLayoutPanel1.Controls.Add(this.btnConvertToDoor43, 2, 6);
 			this.tableLayoutPanel1.Controls.Add(this.label3, 1, 1);
 			this.tableLayoutPanel1.Controls.Add(this.label4, 1, 0);
+			this.tableLayoutPanel1.Controls.Add(this.chkChunkMarkers, 2, 5);
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-			this.tableLayoutPanel1.RowCount = 7;
+			this.tableLayoutPanel1.RowCount = 8;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(727, 516);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(727, 491);
 			this.tableLayoutPanel1.TabIndex = 6;
 			// 
 			// btnConvertToParatext
@@ -141,7 +147,7 @@
 			this.btnConvertToParatext.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.btnConvertToParatext.AutoSize = true;
 			this.btnConvertToParatext.Location = new System.Drawing.Point(226, 182);
-			this.btnConvertToParatext.Margin = new System.Windows.Forms.Padding(3, 12, 3, 6);
+			this.btnConvertToParatext.Margin = new System.Windows.Forms.Padding(3, 12, 3, 12);
 			this.btnConvertToParatext.Name = "btnConvertToParatext";
 			this.btnConvertToParatext.Size = new System.Drawing.Size(145, 28);
 			this.btnConvertToParatext.TabIndex = 6;
@@ -153,13 +159,14 @@
 			// 
 			this.btnConvertToDoor43.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.btnConvertToDoor43.AutoSize = true;
-			this.btnConvertToDoor43.Location = new System.Drawing.Point(226, 228);
-			this.btnConvertToDoor43.Margin = new System.Windows.Forms.Padding(3, 12, 3, 6);
+			this.btnConvertToDoor43.Location = new System.Drawing.Point(226, 268);
+			this.btnConvertToDoor43.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
 			this.btnConvertToDoor43.Name = "btnConvertToDoor43";
 			this.btnConvertToDoor43.Size = new System.Drawing.Size(141, 28);
 			this.btnConvertToDoor43.TabIndex = 7;
 			this.btnConvertToDoor43.Text = "Convert to Door43";
 			this.btnConvertToDoor43.UseVisualStyleBackColor = true;
+			this.btnConvertToDoor43.Click += new System.EventHandler(this.btnConvertToDoor43_Click);
 			// 
 			// label3
 			// 
@@ -187,11 +194,44 @@
 			this.label4.Text = "* Currently, this has only been tested with Paratext 8";
 			this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			// 
+			// chkChunkMarkers
+			// 
+			this.chkChunkMarkers.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.chkChunkMarkers.AutoSize = true;
+			this.chkChunkMarkers.Checked = true;
+			this.chkChunkMarkers.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.chkChunkMarkers.Location = new System.Drawing.Point(227, 234);
+			this.chkChunkMarkers.Margin = new System.Windows.Forms.Padding(4, 12, 3, 6);
+			this.chkChunkMarkers.Name = "chkChunkMarkers";
+			this.chkChunkMarkers.Size = new System.Drawing.Size(166, 22);
+			this.chkChunkMarkers.TabIndex = 11;
+			this.chkChunkMarkers.TabStop = false;
+			this.chkChunkMarkers.Text = "Insert chunk markers";
+			this.chkChunkMarkers.UseVisualStyleBackColor = true;
+			// 
+			// statusStrip1
+			// 
+			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblStatus});
+			this.statusStrip1.Location = new System.Drawing.Point(0, 518);
+			this.statusStrip1.Name = "statusStrip1";
+			this.statusStrip1.Size = new System.Drawing.Size(751, 22);
+			this.statusStrip1.SizingGrip = false;
+			this.statusStrip1.TabIndex = 7;
+			this.statusStrip1.Text = "statusStrip1";
+			// 
+			// lblStatus
+			// 
+			this.lblStatus.Name = "lblStatus";
+			this.lblStatus.Size = new System.Drawing.Size(39, 17);
+			this.lblStatus.Text = "Ready";
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(751, 540);
+			this.Controls.Add(this.statusStrip1);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -204,7 +244,10 @@
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
+			this.statusStrip1.ResumeLayout(false);
+			this.statusStrip1.PerformLayout();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -221,6 +264,9 @@
 		private System.Windows.Forms.Button btnConvertToDoor43;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.CheckBox chkChunkMarkers;
+		private System.Windows.Forms.StatusStrip statusStrip1;
+		private System.Windows.Forms.ToolStripStatusLabel lblStatus;
 	}
 }
 

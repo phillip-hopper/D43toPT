@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,16 +50,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Door43\Chunks.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Paratext8ProjectSettings.cs" />
+    <Compile Include="Paratext\Paratext8ProjectSettings.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProgramSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Resources.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -68,6 +74,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -77,6 +84,138 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Resources\chunks_v2\1ch.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\1co.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\1jn.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\1ki.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\1pe.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\1sa.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\1th.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\1ti.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\2ch.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\2co.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\2jn.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\2ki.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\2pe.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\2sa.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\2th.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\2ti.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\3jn.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\act.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\amo.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\col.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\dan.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\deu.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\ecc.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\eph.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\est.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\exo.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\ezk.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\ezr.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\gal.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\gen.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\hab.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\hag.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\heb.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\hos.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\isa.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\jas.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\jdg.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\jer.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\jhn.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\job.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\jol.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\jon.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\jos.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\jud.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\lam.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\lev.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\luk.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\mal.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\mat.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\mic.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\mrk.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\nam.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\neh.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\num.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\oba.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\phm.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\php.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\pro.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\psa.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\rev.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\rom.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\rut.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\sng.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\tit.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\zec.json" />
+    <EmbeddedResource Include="Resources\chunks_v2\zep.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\1ch.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\1co.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\1jn.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\1ki.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\1pe.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\1sa.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\1th.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\1ti.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\2ch.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\2co.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\2jn.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\2ki.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\2pe.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\2sa.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\2th.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\2ti.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\3jn.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\act.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\amo.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\col.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\dan.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\deu.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\ecc.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\eph.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\est.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\exo.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\ezk.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\ezr.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\gal.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\gen.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\hab.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\hag.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\heb.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\hos.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\isa.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\jas.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\jdg.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\jer.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\jhn.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\job.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\jol.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\jon.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\jos.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\jud.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\lam.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\lev.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\luk.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\mal.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\mat.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\mic.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\mrk.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\nam.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\neh.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\num.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\oba.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\phm.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\php.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\pro.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\psa.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\rev.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\rom.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\rut.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\sng.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\tit.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\zec.json" />
+    <EmbeddedResource Include="Resources\chunks_v3\zep.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -84,6 +223,7 @@
   <ItemGroup>
     <Content Include="app.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
