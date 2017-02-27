@@ -2,6 +2,7 @@
 using D43toPT.Paratext;
 using System;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -89,6 +90,18 @@ namespace D43toPT
 					lblStatus.Text = "Ready";
 				}
 			}
+			else if (isPhilsFormat())
+			{
+				try
+				{
+					exportPhilToParatext(txtDoor43Directory.Text, txtParatextDirectory.Text);
+				}
+				finally
+				{
+					lblStatus.Text = "Ready";
+				}
+			}
+
 		}
 
 		private void exportEnglishToParatext(string sourceDirectory, string targetDirectory)
@@ -223,6 +236,64 @@ namespace D43toPT
 			MessageBox.Show("Finished.");
 		}
 
+		private void exportPhilToParatext(string sourceDirectory, string targetDirectory)
+		{
+			// get Paratext settings
+			var paratextSettings = new Paratext8ProjectSettings(targetDirectory);
+			var projectName = paratextSettings.GetValue("Name");
+			var booksPresent = new int[123];
+
+			// get book information
+			var bookData = Resources.Resources.GetBookData();
+
+			// copy source usfm files
+			var usfmDir = Path.Combine(sourceDirectory, "usfm");
+			foreach (var fileName in Directory.EnumerateFiles(usfmDir).Where(filename => filename.ToLower().EndsWith("sfm")))
+			{
+				// read the source file
+				var usfm = File.ReadAllText(fileName);
+
+				// get the book id and number for the Paratext file name
+				if (!usfm.StartsWith(@"\id "))
+				{
+					MessageBox.Show(string.Format("Not a valid USFM file: {0}", fileName));
+					return;
+				}
+
+				var bookID = usfm.Substring(4, 3);
+
+				// update books present 
+				var bookNum = int.Parse(bookData[bookID][1]);
+
+				if (bookNum > 40)
+					bookNum--;
+
+				bookNum--;
+				booksPresent[bookNum] = 1;
+
+				// get paratext file name
+				var bookName = paratextSettings.UsfmFileName(bookData[bookID][1], bookID);
+				lblStatus.Text = "Exporting " + bookName;
+				Application.DoEvents();
+
+				// clean usfm
+				usfm = cleanUsfm(usfm);
+
+				// write the usfm file
+				if (string.IsNullOrEmpty(usfm))
+					continue;
+
+				File.WriteAllText(Path.Combine(targetDirectory, bookName), usfm);
+			}
+
+			// update Settings.xml
+			paratextSettings.SetValue("BooksPresent", string.Join("", booksPresent));
+			paratextSettings.Save();
+
+			// finished
+			MessageBox.Show("Finished.");
+		}
+
 		private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
 		{
 			// save settings
@@ -266,6 +337,20 @@ namespace D43toPT
 			if (Directory.Exists(door43Dir))
 			{
 				if (File.Exists(Path.Combine(door43Dir, "00.usfm")) && File.Exists(Path.Combine(door43Dir, "01.usfm")))
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		private bool isPhilsFormat()
+		{
+			var door43Dir = Path.Combine(txtDoor43Directory.Text, "usfm");
+			if (Directory.Exists(door43Dir))
+			{
+				if (File.Exists(Path.Combine(txtDoor43Directory.Text, "meta.json")))
 				{
 					return true;
 				}
@@ -325,6 +410,18 @@ namespace D43toPT
 
 			// write file
 			File.WriteAllText(outFilePath, chapterText);
+		}
+
+		private string cleanUsfm(string usfm)
+		{
+			// remove \s5 tags
+			usfm = usfm.Replace(@"\s5", "");
+
+			// remove extra white space
+			usfm = usfm.Replace(Environment.NewLine + Environment.NewLine + Environment.NewLine + Environment.NewLine, Environment.NewLine);
+			usfm = usfm.Replace(Environment.NewLine + Environment.NewLine + Environment.NewLine, Environment.NewLine);
+			usfm = usfm.Replace(Environment.NewLine + Environment.NewLine, Environment.NewLine);
+			return usfm.TrimStart();
 		}
 	}
 }
