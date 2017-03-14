@@ -101,6 +101,17 @@ namespace D43toPT
 					lblStatus.Text = "Ready";
 				}
 			}
+            else
+            {
+                try
+                {
+                    exportDirectoryToParatext(txtDoor43Directory.Text, txtParatextDirectory.Text);
+                }
+                finally
+                {
+                    lblStatus.Text = "Ready";
+                }
+            }
 
 		}
 
@@ -238,63 +249,67 @@ namespace D43toPT
 
 		private void exportPhilToParatext(string sourceDirectory, string targetDirectory)
 		{
-			// get Paratext settings
-			var paratextSettings = new Paratext8ProjectSettings(targetDirectory);
-			var projectName = paratextSettings.GetValue("Name");
-			var booksPresent = new int[123];
-
-			// get book information
-			var bookData = Resources.Resources.GetBookData();
-
-			// copy source usfm files
-			var usfmDir = Path.Combine(sourceDirectory, "usfm");
-			foreach (var fileName in Directory.EnumerateFiles(usfmDir).Where(filename => filename.ToLower().EndsWith("sfm")))
-			{
-				// read the source file
-				var usfm = File.ReadAllText(fileName);
-
-				// get the book id and number for the Paratext file name
-				if (!usfm.StartsWith(@"\id "))
-				{
-					MessageBox.Show(string.Format("Not a valid USFM file: {0}", fileName));
-					return;
-				}
-
-				var bookID = usfm.Substring(4, 3);
-
-				// update books present 
-				var bookNum = int.Parse(bookData[bookID][1]);
-
-				if (bookNum > 40)
-					bookNum--;
-
-				bookNum--;
-				booksPresent[bookNum] = 1;
-
-				// get paratext file name
-				var bookName = paratextSettings.UsfmFileName(bookData[bookID][1], bookID);
-				lblStatus.Text = "Exporting " + bookName;
-				Application.DoEvents();
-
-				// clean usfm
-				usfm = cleanUsfm(usfm);
-
-				// write the usfm file
-				if (string.IsNullOrEmpty(usfm))
-					continue;
-
-				File.WriteAllText(Path.Combine(targetDirectory, bookName), usfm);
-			}
-
-			// update Settings.xml
-			paratextSettings.SetValue("BooksPresent", string.Join("", booksPresent));
-			paratextSettings.Save();
-
-			// finished
-			MessageBox.Show("Finished.");
+            exportDirectoryToParatext(Path.Combine(sourceDirectory, "usfm"), targetDirectory);
 		}
 
-		private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void exportDirectoryToParatext(string sourceDirectory, string targetDirectory)
+        {
+            // get Paratext settings
+            var paratextSettings = new Paratext8ProjectSettings(targetDirectory);
+            var projectName = paratextSettings.GetValue("Name");
+            var booksPresent = new int[123];
+
+            // get book information
+            var bookData = Resources.Resources.GetBookData();
+
+            // copy source usfm files
+            foreach (var fileName in Directory.EnumerateFiles(sourceDirectory).Where(filename => filename.ToLower().EndsWith("sfm")))
+            {
+                // read the source file
+                var usfm = File.ReadAllText(fileName);
+
+                // get the book id and number for the Paratext file name
+                if (!usfm.StartsWith(@"\id "))
+                {
+                    MessageBox.Show(string.Format("Not a valid USFM file: {0}", fileName));
+                    return;
+                }
+
+                var bookID = usfm.Substring(4, 3);
+
+                // update books present 
+                var bookNum = int.Parse(bookData[bookID][1]);
+
+                if (bookNum > 40)
+                    bookNum--;
+
+                bookNum--;
+                booksPresent[bookNum] = 1;
+
+                // get paratext file name
+                var bookName = paratextSettings.UsfmFileName(bookData[bookID][1], bookID);
+                lblStatus.Text = "Exporting " + bookName;
+                Application.DoEvents();
+
+                // clean usfm
+                usfm = cleanUsfm(usfm);
+
+                // write the usfm file
+                if (string.IsNullOrEmpty(usfm))
+                    continue;
+
+                File.WriteAllText(Path.Combine(targetDirectory, bookName), usfm);
+            }
+
+            // update Settings.xml
+            paratextSettings.SetValue("BooksPresent", string.Join("", booksPresent));
+            paratextSettings.Save();
+
+            // finished
+            MessageBox.Show("Finished.");
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
 		{
 			// save settings
 			if (!string.IsNullOrEmpty(txtParatextDirectory.Text))
